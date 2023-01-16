@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load i18n %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans 'Email' %}</title>
+</head>
+<body>
+<b><span style="font-size: 20px">{% trans 'Otp Received' %} </span></b>
+<br>
+<p>
+    <b>{% trans 'OTP:' %}</b> {{ data.otp }}<br>
+
+    <br>
+</p>
+
+</body>
+</html>

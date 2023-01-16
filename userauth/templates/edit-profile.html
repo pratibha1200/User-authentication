@@ -1,0 +1,68 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | BootstrapMade</title>
+    <meta content="Login BootstrapMade" name="description">
+    <link rel="canonical" href="https://bootstrapmade.com/contact/">
+    <link rel="icon" href="https://bootstrapmade.com/assets/img/favicon.png">
+    <link rel="apple-touch-icon" href="https://bootstrapmade.com/assets/img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="stylesheet" href="https://bootstrapmade.com/assets/css/style-4.3.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="alternate" type="application/rss+xml" title="BootstrapMade » Feed"
+          href="https://bootstrapmade.com/feed/">
+    <meta name="google-site-verification" content="j6o3lD4O-aaTerWixKmgUxjAA0n4I1JM3O6t82X9KVw">
+</head>
+<body style="background: #e5e5e5">
+<main class="mt-0 vh-100 container-fluid d-flex align-items-center justify-content-center">
+    <div class="login-custom-card">
+        <div class="col-12">
+            <div class="page-header pt-3 mb-4"><h1 class="page-title">Edit Profile</h1></div>
+        </div>
+        <div class="col-12">
+            <form class="contact-form custom-form-login php-email-form mb-4" role="form" method="POST"
+                  action="{% url 'edit_profile' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label class="custom-label">First Name<sup>*</sup></label>
+                        <input placeholder="Enter here" aria-label="input" type="text" class="form-control"
+                               name="first_name" value=""/>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label class="custom-label">Last Name<sup>*</sup></label>
+                        <input placeholder="Enter here" aria-label="input" type="text" class="form-control"
+                               name="last_name" value=""/>
+                    </div>
+                    <div class="form-group col-12">
+                        <label class="custom-label">Profile Photo<sup>*</sup></label>
+                        <input placeholder="Enter here" aria-label="input" type="file" class="form-control"
+                               name="profile"/>
+                    </div>
+
+                    <div class="form-send mb-4 col-md-12">
+                        <button type="submit" class="btn btn-large">Update</button>
+                    </div>
+
+                </div>
+                {{ message }}
+
+
+            </form>
+        </div>
+        <form class="contact-form custom-form-login php-email-form mb-4" role="form" method=''
+                  action="{% url 'delete' %}">
+            {% csrf_token %}
+            <div class="form-send col-md-12">
+                <button class="mb-0">Delete Account <a class="fw-bold" href="{% url 'delete' %}"></a>
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

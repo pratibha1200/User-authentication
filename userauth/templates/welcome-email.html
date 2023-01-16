@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% load i18n %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans 'Email' %}</title>
+</head>
+<body>
+<b><span style="font-size: 20px">{% trans 'Welcome to the Website' %} </span></b>
+<br>
+<p>
+    {{ user.email }}
+</p>
+
+</body>
+</html>

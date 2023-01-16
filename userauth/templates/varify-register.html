@@ -1,0 +1,50 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | BootstrapMade</title>
+    <meta content="Login BootstrapMade" name="description">
+    <link rel="canonical" href="https://bootstrapmade.com/contact/">
+    <link rel="icon" href="https://bootstrapmade.com/assets/img/favicon.png">
+    <link rel="apple-touch-icon" href="https://bootstrapmade.com/assets/img/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="stylesheet" href="https://bootstrapmade.com/assets/css/style-4.3.css">
+   <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="alternate" type="application/rss+xml" title="BootstrapMade » Feed"
+          href="https://bootstrapmade.com/feed/">
+    <meta name="google-site-verification" content="j6o3lD4O-aaTerWixKmgUxjAA0n4I1JM3O6t82X9KVw">
+</head>
+<body style="background: #e5e5e5">
+<main class="mt-0 vh-100 container-fluid d-flex align-items-center justify-content-center">
+    <div class="login-custom-card">
+
+        <div class="col-12">
+            <form class="contact-form custom-form-login php-email-form mb-4" role="form" method="POST"
+                  action="{% url 'verify' %}">
+                {% csrf_token %}
+                <input value="{{ token }}" type="hidden" name="token">
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label class="custom-label">OTP<sup>*</sup></label>
+                        <input id="otp_field" placeholder="Enter here" aria-label="input" type="text"
+                               class="form-control"
+                               name="otp" value=""/>
+                    </div>
+                    <div class="form-send mb-4 col-md-12">
+                        <button type="submit" class="btn btn-large">Verify</button>
+                    </div>
+                    <div class="form-send col-md-12">
+                        <p class="mb-0">You don`t have an account <a class="fw-bold" href="{% url 'register' %}">Register</a>
+                        </p>
+                    </div>
+                </div>
+                {{ message }}
+            </form>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
