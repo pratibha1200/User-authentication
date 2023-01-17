@@ -3,7 +3,7 @@ import base64
 import pyotp
 from django.core.mail import EmailMessage
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse
@@ -207,7 +207,7 @@ class ResetPasswordView(View):
                 else:
                     message = 'User Not Found'
         else:
-            message = 'Register Failed!'
+            message = 'Reset Password Failed'
         return render(request, self.template_name, context={'form': form, 'message': message})
 
 
@@ -292,5 +292,11 @@ class ChangePasswordView(View):
                 else:
                     message = 'You are Not Login'
         else:
-            message = 'Register Failed!'
+            message = 'Password Change Failed!'
         return render(request, self.template_name, context={'form': form, 'message': message})
+
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return render(request, 'index.html')
