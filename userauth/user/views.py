@@ -219,7 +219,11 @@ class ProfileView(View):
         form = self.form_class()
         message = ''
         user = self.request.user
-        return render(request, self.template_name, context={'form': form, 'message': message, 'user': user})
+        if user.is_authenticated:
+            return render(request, self.template_name, context={'form': form, 'message': message, 'user': user})
+        else:
+            message = 'You Are not Login'
+            return render(request, self.template_name, context={'form': form, 'message': message})
 
 
 class UpdateProfileView(View):
@@ -236,14 +240,17 @@ class UpdateProfileView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             user = self.request.user
-            if form.cleaned_data.get('first_name'):
-                user.first_name = form.cleaned_data.get('first_name')
-            if form.cleaned_data.get('last_name'):
-                user.last_name = form.cleaned_data.get('last_name')
-            if request.FILES:
-                user.profile = request.FILES['profile']
-            user.save()
-            message = 'Profile Updated'
+            if user.is_authenticated:
+                if form.cleaned_data.get('first_name'):
+                    user.first_name = form.cleaned_data.get('first_name')
+                if form.cleaned_data.get('last_name'):
+                    user.last_name = form.cleaned_data.get('last_name')
+                if request.FILES:
+                    user.profile = request.FILES['profile']
+                user.save()
+                message = 'Profile Updated'
+            else:
+                message = 'First Login'
         else:
             message = 'Profile Update Failed!'
         return render(request, self.template_name, context={'form': form, 'message': message})
@@ -258,7 +265,7 @@ class DeleteUserView(View):
             data = get_object_or_404(User, id=pk)
             data.delete()
             return redirect("index")
-        return render(request, 'index.html', context={'message': message})
+        return render(request, 'edit-profile.html', context={'message': message})
 
 
 class ChangePasswordView(View):
